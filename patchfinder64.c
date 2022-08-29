@@ -16,6 +16,16 @@ typedef unsigned long long addr_t;
 
 #define MACHO(p) ((*(unsigned int *)(p) & ~1) == 0xfeedface)
 
+//  0x94000000, 0xFC000000 < CALL
+//                  what        mask
+#define INSN_RETAB  0xD65F0FFF, 0xFFFFFFFF
+#define INSN_RET    0xD65F03C0, 0xFFFFFFFF
+#define INSN_CALL   0x94000000, 0xFC000000
+#define INSN_B      0x14000000, 0xFC000000
+#define INSN_CBZ    0x34000000, 0xFC000000
+#define INSN_BLR    0xD63F0000, 0xFFFFFC1F
+#define INSN_MOV    0x52800000, 0xFFFF0000
+
 /* generic stuff *************************************************************/
 
 #define UCHAR_MAX 255
@@ -704,12 +714,12 @@ term_kernel(void)
 
 /* these operate on VA ******************************************************/
 
-#define INSN_RETAB  0xD65F0FFF, 0xFFFFFFFF
+/*#define INSN_RETAB  0xD65F0FFF, 0xFFFFFFFF
 #define INSN_RET    0xD65F03C0, 0xFFFFFFFF
 #define INSN_CALL   0x94000000, 0xFC000000
 #define INSN_B      0x14000000, 0xFC000000
 #define INSN_CBZ    0x34000000, 0xFC000000
-#define INSN_BLR    0xD63F0000, 0xFFFFFC1F
+#define INSN_BLR    0xD63F0000, 0xFFFFFC1F*/
 
 addr_t
 find_register_value(addr_t where, int reg)
